@@ -39,7 +39,7 @@ namespace Lexicon_Assignment4.Model
 
         public void CheckNullOrEmptyString(string str)
         {
-            if (string.IsNullOrEmpty(str))
+            if (string.IsNullOrEmpty(str.Trim()))
                 throw new NullReferenceException();
         }
     }
