@@ -7,7 +7,7 @@ namespace Lexicon_Assignment4.Model
         private int todoId;
         private string description;
         private bool done;
-        //private Person assignee;
+        private Person assignee;
 
         public int TodoId { get { return todoId; } private set { todoId = value; } }
         public string Description
@@ -23,6 +23,16 @@ namespace Lexicon_Assignment4.Model
             }
         }
         public bool Done { get { return done; } set { done = value; } }
+        public Person Assignee 
+        { 
+            get { return assignee; } 
+            set 
+            {
+                if (value == null)
+                    throw new NullReferenceException("Assignee is null.");
+                assignee = value;
+            } 
+        }
         public Todo(int todoId, string description)
         {
             TodoId = todoId;
