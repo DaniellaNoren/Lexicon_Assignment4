@@ -1,9 +1,7 @@
 ﻿using System;
 
 namespace Lexicon_Assignment4.Model
-{/// <summary>
-/// Class representing a Person
-/// </summary>
+{
     public class Person
     {
         public int PersonId { get { return personId; } }
@@ -40,11 +38,10 @@ namespace Lexicon_Assignment4.Model
         }
 
         /// <summary>
-        /// Takes in a string, throws exception if it is either Null or Empty. 
+        /// Checks that string is not empty or null. If it is, throws an exception
         /// </summary>
-        /// <param name="str">String to be checked</param>
-        /// <exception cref="System.NullReferenceException">Thrown if string is null or empty</exception>
-        public void CheckNullOrEmptyString(string str)   
+        /// <param name="str">String to be tested</param>
+        public void CheckNullOrEmptyString(string str)
         {
             if (string.IsNullOrEmpty(str.Trim()))
                 throw new NullReferenceException();
