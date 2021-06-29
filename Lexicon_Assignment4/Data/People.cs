@@ -36,7 +36,7 @@ namespace Lexicon_Assignment4.Data
         /// <returns>Person if id is matching, null if no match is found</returns>
         public Person FindById(int personId)
         {
-            foreach(Person person in persons)
+            foreach (Person person in persons)
             {
                 if (person.PersonId == personId)
                     return person;
@@ -77,6 +77,36 @@ namespace Lexicon_Assignment4.Data
         {
             persons = new Person[0];
             PersonSequencer.Reset();
+        }
+
+        
+        /// <summary>
+        /// Finds person based on personId and removes it from the array. If person not found, nothing is changed.
+        /// </summary>
+        /// <param name="personId">Id of Person</param>
+        public void RemovePerson(int personId)
+        {
+            Person person = FindById(personId);
+
+            if (person == null)
+                return;
+
+            int index = Array.IndexOf(persons, person);
+
+            RemoveIndex(index);
+        }
+
+        /// <summary>
+        /// Makes a new array, copies all values from old array excluding index sent in.
+        /// </summary>
+        /// <param name="index">Index to be excluded</param>
+        public void RemoveIndex(int index)
+        {
+            Person[] newPersons = new Person[Size() - 1];
+            Array.Copy(persons, newPersons, length: index);
+            Array.ConstrainedCopy(persons, index + 1, newPersons, index, Size() - index - 1);
+
+            persons = newPersons;
         }
     }
 }
