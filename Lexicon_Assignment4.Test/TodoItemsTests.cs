@@ -7,7 +7,7 @@ namespace Lexicon_Assignment4.Test
 {
     public class TodoItemsTests
     {
-        private readonly TodoItems items = new TodoItems();
+        private readonly TodoItems todos = new TodoItems();
 
         private Person CreatePerson()
         {
@@ -29,16 +29,16 @@ namespace Lexicon_Assignment4.Test
             Person person = CreatePerson();
 
             //Act
-            int before = items.Size();
-            items.AddTodo(description, done, person);
-            int result = items.Size();
+            int before = todos.Size();
+            todos.AddTodo(description, done, person);
+            int result = todos.Size();
 
             //Assert
             Assert.Equal(before, result - 1);
         }
 
         /// <summary>
-        /// Checks that TodoItems contains all items
+        /// Checks that TodoItems contains all todos
         /// </summary>
         [Fact]
         public void FindAll_ShouldContainAllTodoItems()
@@ -51,12 +51,12 @@ namespace Lexicon_Assignment4.Test
             Person person = CreatePerson();
 
             //Act
-            items.Clear();
-            items.AddTodo(description1, done1, person);
-            items.AddTodo(description2, done2, person);
+            todos.Clear();
+            todos.AddTodo(description1, done1, person);
+            todos.AddTodo(description2, done2, person);
 
             //Assert
-            Assert.True(items.Size() == 2);
+            Assert.True(todos.Size() == 2);
         }
 
         [Fact]
@@ -66,7 +66,7 @@ namespace Lexicon_Assignment4.Test
         public void FindById_ShouldReturnTodoItemToFind()
         {
             // Arrange
-            items.Clear();
+            todos.Clear();
             // Arrange
             string description1 = "My todo 1";
             bool done1 = false;
@@ -75,12 +75,12 @@ namespace Lexicon_Assignment4.Test
             Person person = CreatePerson();
 
             //Act
-            items.Clear();
-            items.AddTodo(description1, done1, person);
-            Todo todo = items.AddTodo(description2, done2, person);
+            todos.Clear();
+            todos.AddTodo(description1, done1, person);
+            Todo todo = todos.AddTodo(description2, done2, person);
 
             //Assert
-            Assert.Equal(todo.TodoId, items.FindById(todo.TodoId).TodoId);
+            Assert.Equal(todo.TodoId, todos.FindById(todo.TodoId).TodoId);
         }
 
         /// <summary>
@@ -93,10 +93,10 @@ namespace Lexicon_Assignment4.Test
             int id = 1;
             
             //Act
-            items.Clear();
+            todos.Clear();
 
             //Assert
-            Assert.Null(items.FindById(id));
+            Assert.Null(todos.FindById(id));
         }
 
         /// <summary>
@@ -106,7 +106,7 @@ namespace Lexicon_Assignment4.Test
         public void AddTodo_ShouldBeAdded()
         {
             // Arrange
-            items.Clear();
+            todos.Clear();
             // Arrange
             string description1 = "My todo 1";
             bool done1 = false;
@@ -115,12 +115,12 @@ namespace Lexicon_Assignment4.Test
             Person person = CreatePerson();
 
             //Act
-            items.Clear();
-            items.AddTodo(description1, done1, person);
-            Todo todo = items.AddTodo(description2, done2, person);
+            todos.Clear();
+            todos.AddTodo(description1, done1, person);
+            Todo todo = todos.AddTodo(description2, done2, person);
 
             //Assert
-            Assert.Equal(todo.TodoId, items.FindById(todo.TodoId).TodoId);
+            Assert.Equal(todo.TodoId, todos.FindById(todo.TodoId).TodoId);
         }
 
 
@@ -136,11 +136,11 @@ namespace Lexicon_Assignment4.Test
             Person person = CreatePerson();
 
             //Act
-            items.Clear();
-            int before = items.Size();
-            items.AddTodo(description, done, person);
-            items.Clear();
-            int result = items.Size();
+            todos.Clear();
+            int before = todos.Size();
+            todos.AddTodo(description, done, person);
+            todos.Clear();
+            int result = todos.Size();
 
             //Assert
             Assert.Equal(result, before);
@@ -153,7 +153,7 @@ namespace Lexicon_Assignment4.Test
         public void FindByAssignee_ShouldReturnTodoItemsWithPersonId()
         {
             // Arrange
-            items.Clear();
+            todos.Clear();
             // Arrange
             string description1 = "My todo 1";
             bool done1 = false;
@@ -170,15 +170,15 @@ namespace Lexicon_Assignment4.Test
             Person person2 = new Person(personId, firstName, lastName);
 
             //Act
-            items.Clear();
-            items.AddTodo(description1, done1, person1);
-            items.AddTodo(description2, done2, person1);
-            items.AddTodo(description3, done3, person1);
-            items.AddTodo(description4, done4, person2);
-            Todo[] todos = items.FindByAssignee(person1.PersonId);
+            todos.Clear();
+            todos.AddTodo(description1, done1, person1);
+            todos.AddTodo(description2, done2, person1);
+            todos.AddTodo(description3, done3, person1);
+            todos.AddTodo(description4, done4, person2);
+            Todo[] items = todos.FindByAssignee(person1.PersonId);
 
             //Assert
-            Assert.True(todos.Length == 3);
+            Assert.True(items.Length == 3);
         }
 
         /// <summary>
@@ -188,8 +188,6 @@ namespace Lexicon_Assignment4.Test
         public void FindByAssignee_ShouldReturnTodoItemsWithAssignee()
         {
             // Arrange
-            items.Clear();
-            // Arrange
             string description1 = "My todo 1";
             bool done1 = false;
             string description2 = "My todo 2";
@@ -205,15 +203,15 @@ namespace Lexicon_Assignment4.Test
             Person person2 = new Person(personId, firstName, lastName);
 
             //Act
-            items.Clear();
-            items.AddTodo(description1, done1, person1);
-            items.AddTodo(description2, done2, person1);
-            items.AddTodo(description3, done3, person1);
-            items.AddTodo(description4, done4, person2);
-            Todo[] todos = items.FindByAssignee(person1);
+            todos.Clear();
+            todos.AddTodo(description1, done1, person1);
+            todos.AddTodo(description2, done2, person1);
+            todos.AddTodo(description3, done3, person1);
+            todos.AddTodo(description4, done4, person2);
+            Todo[] items = todos.FindByAssignee(person1);
 
             //Assert
-            Assert.True(todos.Length == 3);
+            Assert.True(items.Length == 3);
         }
 
         /// <summary>
@@ -222,8 +220,6 @@ namespace Lexicon_Assignment4.Test
         [Fact]
         public void FindByAssignee_ShouldReturnUnAssignedTodoItems()
         {
-            // Arrange
-            items.Clear();
             // Arrange
             string description1 = "My todo 1";
             bool done1 = false;
@@ -236,15 +232,15 @@ namespace Lexicon_Assignment4.Test
             Person person1 = CreatePerson();
 
             //Act
-            items.Clear();
-            items.AddTodo(description1, done1, person1);
-            items.AddTodo(description2, done2, person1);
-            items.AddTodo(description3, done3, person1);
-            items.AddTodo(description4, done4, null);
-            Todo[] todos = items.FindUnAssignedTodoITems();
+            todos.Clear();
+            todos.AddTodo(description1, done1, person1);
+            todos.AddTodo(description2, done2, person1);
+            todos.AddTodo(description3, done3, person1);
+            todos.AddTodo(description4, done4, null);
+            Todo[] items = todos.FindUnAssignedTodoITems();
 
             //Assert
-            Assert.True(todos.Length == 1);
+            Assert.True(items.Length == 1);
         }
 
         /// <summary>
@@ -253,8 +249,6 @@ namespace Lexicon_Assignment4.Test
         [Fact]
         public void FindByDoneStatus_ShouldReturnTodoItemsWithDoneStatusTrue()
         {
-            // Arrange
-            items.Clear();
             // Arrange
             string description1 = "My todo 1";
             bool done1 = false;
@@ -265,14 +259,71 @@ namespace Lexicon_Assignment4.Test
             Person person = CreatePerson();
 
             //Act
-            items.Clear();
-            items.AddTodo(description1, done1, person);
-            items.AddTodo(description2, done2, person);
-            items.AddTodo(description3, done3, person);
-            Todo[] todos = items.FindByDoneStatus(false);
+            todos.Clear();
+            todos.AddTodo(description1, done1, person);
+            todos.AddTodo(description2, done2, person);
+            todos.AddTodo(description3, done3, person);
+            Todo[] items = todos.FindByDoneStatus(false);
 
             //Assert
-            Assert.Equal(2, todos.Length);
+            Assert.True(items.Length == 2);
+        }
+
+        /// <summary>
+        /// Checks that a Todo is removed
+        /// </summary>
+        [Fact]
+        public void RemoveTodo_ShouldReturnArrayWithoutRemovedTodo()
+        {
+            // Arrange
+            string description1 = "My todo 1";
+            bool done1 = false;
+            string description2 = "My todo 2";
+            bool done2 = false;
+            string description3 = "My todo 3";
+            bool done3 = true;
+            Person person = CreatePerson();
+
+            //Act
+            todos.Clear();
+            todos.AddTodo(description1, done1, person);
+            Todo todo = todos.AddTodo(description2, done2, person);
+            todos.AddTodo(description3, done3, person);
+            int before = todos.Size();
+            todos.RemoveTodo(todo.TodoId);
+            int result = todos.Size();
+
+            //Assert
+            Assert.Equal(result, before - 1);
+        }
+
+        /// <summary>
+        /// Checks that Todos with doneStatus true is returned
+        /// </summary>
+        [Fact]
+        public void RemoveTodo_ShouldReturnUnchangedArray()
+        {
+            // Arrange
+            string description1 = "My todo 1";
+            bool done1 = false;
+            string description2 = "My todo 2";
+            bool done2 = false;
+            string description3 = "My todo 3";
+            bool done3 = true;
+            Person person = CreatePerson();
+            int removedId = 99;
+
+            //Act
+            todos.Clear();
+            todos.AddTodo(description1, done1, person);
+            Todo todo = todos.AddTodo(description2, done2, person);
+            todos.AddTodo(description3, done3, person);
+            int before = todos.Size();
+            todos.RemoveTodo(removedId);
+            int result = todos.Size();
+
+            //Assert
+            Assert.Equal(result, before);
         }
     }
 }

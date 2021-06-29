@@ -79,23 +79,6 @@ namespace Lexicon_Assignment4.Test
             //Assert
             Assert.Equal("Empty or only whitespace is not allowed.", result.Message);
         }
-
-        [Fact]
-        public void AssigneeIsNull_ShouldThrowException()
-        {
-            //Arrange
-            int id = 1;
-            string description = "First todo";
-            Person assignee = null;
-
-            //Act
-            Todo todo = new Todo(id, description);
-            NullReferenceException result = Assert.Throws<NullReferenceException>(
-               () => todo.Assignee = assignee);
-
-            //Assert
-            Assert.Equal("Assignee is null.", result.Message);
-        }
     }
 
 

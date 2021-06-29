@@ -11,7 +11,7 @@ namespace Lexicon_Assignment4.Data
     /// </summary>
     public class TodoItems
     {
-        private static Todo[] items = new Todo[0];
+        private static Todo[] todos = new Todo[0];
 
         /// <summary>
         /// Returns the size of the Todo Array
@@ -19,7 +19,7 @@ namespace Lexicon_Assignment4.Data
         /// <returns>The size of the Todo Array</returns>
         public int Size()
         {
-            return items.Length;
+            return todos.Length;
         }
 
         /// <summary>
@@ -28,18 +28,17 @@ namespace Lexicon_Assignment4.Data
         /// <returns>All Todos</returns>
         public Todo[] FindAll()
         {
-            return items;
+            return todos;
         }
 
         /// <summary>
         /// Finds Todo in Array based on id
         /// </summary>
         /// <param name="todoId">The todoId for the Todo to find</param>
-        /// <param name="assignee">The person to assignee a Todo item</param>
         /// <returns>Todo if id is matching, null if no match is found</returns>
         public Todo FindById(int todoId)
         {
-            foreach (Todo item in items)
+            foreach (Todo item in todos)
             {
                 if (item.TodoId == todoId)
                 {
@@ -56,18 +55,18 @@ namespace Lexicon_Assignment4.Data
         /// <returns>Array of todos, or an empty array if no match</returns>
         public Todo[] FindByDoneStatus(bool doneStatus)
         {
-            Todo[] todos = new Todo[0];
+            Todo[] items = new Todo[0];
             int index = 0;
-            for (int i= 0; i < items.Length; i++)
+            for (int i= 0; i < todos.Length; i++)
             {
-                if (items[i].Done == doneStatus)
+                if (todos[i].Done == doneStatus)
                 {
-                    Array.Resize(ref todos, index + 1);
-                    todos[index] = items[i];
+                    Array.Resize(ref items, index + 1);
+                    items[index] = todos[i];
                     index++;
                 }
             }
-            return todos;
+            return items;
         }
 
         /// <summary>
@@ -77,18 +76,18 @@ namespace Lexicon_Assignment4.Data
         /// <returns>Array of todos, or an empty array if no match</returns>
         public Todo[] FindByAssignee(int personId)
         {
-            Todo[] todos = new Todo[0];
+            Todo[] items = new Todo[0];
             int index = 0;
-            for (int i = 0; i < items.Length; i++)
+            for (int i = 0; i < todos.Length; i++)
             {
-                if (items[i].Assignee.PersonId == personId)
+                if (todos[i].Assignee.PersonId == personId)
                 {
-                    Array.Resize(ref todos, index + 1);
-                    todos[index] = items[i];
+                    Array.Resize(ref items, index + 1);
+                    items[index] = todos[i];
                     index++;
                 }
             }
-            return todos;
+            return items;
         }
 
         /// <summary>
@@ -98,39 +97,38 @@ namespace Lexicon_Assignment4.Data
         /// <returns>Array of todos, or an empty array if no match</returns>
         public Todo[] FindByAssignee(Person person)
         {
-            Todo[] todos = new Todo[0];
+            Todo[] items = new Todo[0];
             int index = 0;
-            for (int i = 0; i < items.Length; i++)
+            for (int i = 0; i < todos.Length; i++)
             {
-                if (items[i].Assignee.PersonId == person.PersonId)
+                if (todos[i].Assignee.PersonId == person.PersonId)
                 {
-                    Array.Resize(ref todos, index + 1);
-                    todos[index] = items[i];
+                    Array.Resize(ref items, index + 1);
+                    items[index] = todos[i];
                     index++;
                 }
             }
-            return todos;
+            return items;
         }
 
         /// <summary>
         /// Finds Todo in Array based on assignee
         /// </summary>
-        /// <param name="person">The Todos with the person to return</param>
         /// <returns>Array of todos, or an empty array if no match</returns>
         public Todo[] FindUnAssignedTodoITems()
         {
-            Todo[] todos = new Todo[0];
+            Todo[] items = new Todo[0];
             int index = 0;
-            for (int i = 0; i < items.Length; i++)
+            for (int i = 0; i < todos.Length; i++)
             {
-                if (items[i].Assignee == null)
+                if (todos[i].Assignee == null)
                 {
-                    Array.Resize(ref todos, index + 1);
-                    todos[index] = items[i];
+                    Array.Resize(ref items, index + 1);
+                    items[index] = todos[i];
                     index++;
                 }
             }
-            return todos;
+            return items;
         }
 
         /// <summary>
@@ -153,8 +151,8 @@ namespace Lexicon_Assignment4.Data
             }
             todo.Done = done;
             todo.Assignee = assignee;
-            Array.Resize(ref items, items.Length + 1);
-            items[Size() - 1] = todo;
+            Array.Resize(ref todos, todos.Length + 1);
+            todos[Size() - 1] = todo;
             return todo;
         }
 
@@ -163,8 +161,37 @@ namespace Lexicon_Assignment4.Data
         /// </summary>
         public void Clear()
         {
-            items = new Todo[0];
+            todos = new Todo[0];
             TodoSequencer.Reset();
+        }
+
+        /// <summary>
+        /// Finds todoitem based on todoId and removes it from the array. If todoitem not found, nothing is changed.
+        /// </summary>
+        /// <param name="todoId">Id of TodoItem</param>
+        public void RemoveTodo(int todoId)
+        {
+            Todo todo = FindById(todoId);
+
+            if (todo == null)
+                return;
+
+            int index = Array.IndexOf(todos, todo);
+
+            RemoveIndex(index);
+        }
+
+        /// <summary>
+        /// Makes a new array, copies all values from old array excluding index sent in.
+        /// </summary>
+        /// <param name="index">Index to be excluded</param>
+        private void RemoveIndex(int index)
+        {
+            Todo[] newTodos = new Todo[Size() - 1];
+            Array.Copy(todos, newTodos, length: index);
+            Array.ConstrainedCopy(todos, index + 1, newTodos, index, Size() - index - 1);
+
+            todos = newTodos;
         }
     }
 }

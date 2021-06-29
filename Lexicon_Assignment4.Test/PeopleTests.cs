@@ -127,6 +127,7 @@ namespace Lexicon_Assignment4.Test
         [Fact]
         public void RemovePerson_ShouldRemoveCorrectPerson()
         {
+            people.Clear();
             Person person = people.CreatePerson("Birgit", "Nilsson");
             InsertPeople();
          

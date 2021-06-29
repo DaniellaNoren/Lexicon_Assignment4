@@ -26,12 +26,7 @@ namespace Lexicon_Assignment4.Model
         public Person Assignee 
         { 
             get { return assignee; } 
-            set 
-            {
-                if (value == null)
-                    throw new NullReferenceException("Assignee is null.");
-                assignee = value;
-            } 
+            set { assignee = value; } 
         }
         public Todo(int todoId, string description)
         {
