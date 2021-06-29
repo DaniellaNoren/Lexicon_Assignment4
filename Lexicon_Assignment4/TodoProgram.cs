@@ -7,7 +7,7 @@ namespace Lexicon_Assignment4
     public class TodoProgram
     {
         public static void Main(string[] args)
-        {
+        { 
 
         }
     }
