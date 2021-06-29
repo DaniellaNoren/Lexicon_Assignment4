@@ -56,7 +56,7 @@ namespace Lexicon_Assignment4.Test
             items.AddTodo(description2, done2, person);
 
             //Assert
-            Assert.Equal(2, items.Size());
+            Assert.True(items.Size() == 2);
         }
 
         [Fact]
@@ -144,6 +144,135 @@ namespace Lexicon_Assignment4.Test
 
             //Assert
             Assert.Equal(result, before);
+        }
+
+        /// <summary>
+        /// Checks that Todos with personId is returned
+        /// </summary>
+        [Fact]
+        public void FindByAssignee_ShouldReturnTodoItemsWithPersonId()
+        {
+            // Arrange
+            items.Clear();
+            // Arrange
+            string description1 = "My todo 1";
+            bool done1 = false;
+            string description2 = "My todo 2";
+            bool done2 = false;
+            string description3 = "My todo 3";
+            bool done3 = true;
+            string description4 = "My todo 4";
+            bool done4 = true;
+            Person person1 = CreatePerson();
+            int personId = PersonSequencer.NextPersonId();
+            string firstName = "Hulda";
+            string lastName = "Larsson";
+            Person person2 = new Person(personId, firstName, lastName);
+
+            //Act
+            items.Clear();
+            items.AddTodo(description1, done1, person1);
+            items.AddTodo(description2, done2, person1);
+            items.AddTodo(description3, done3, person1);
+            items.AddTodo(description4, done4, person2);
+            Todo[] todos = items.FindByAssignee(person1.PersonId);
+
+            //Assert
+            Assert.True(todos.Length == 3);
+        }
+
+        /// <summary>
+        /// Checks that Todos with assignee is returned
+        /// </summary>
+        [Fact]
+        public void FindByAssignee_ShouldReturnTodoItemsWithAssignee()
+        {
+            // Arrange
+            items.Clear();
+            // Arrange
+            string description1 = "My todo 1";
+            bool done1 = false;
+            string description2 = "My todo 2";
+            bool done2 = false;
+            string description3 = "My todo 3";
+            bool done3 = true;
+            string description4 = "My todo 4";
+            bool done4 = true;
+            Person person1 = CreatePerson();
+            int personId = PersonSequencer.NextPersonId();
+            string firstName = "Hulda";
+            string lastName = "Larsson";
+            Person person2 = new Person(personId, firstName, lastName);
+
+            //Act
+            items.Clear();
+            items.AddTodo(description1, done1, person1);
+            items.AddTodo(description2, done2, person1);
+            items.AddTodo(description3, done3, person1);
+            items.AddTodo(description4, done4, person2);
+            Todo[] todos = items.FindByAssignee(person1);
+
+            //Assert
+            Assert.True(todos.Length == 3);
+        }
+
+        /// <summary>
+        /// Checks that Todos with assignee is returned
+        /// </summary>
+        [Fact]
+        public void FindByAssignee_ShouldReturnUnAssignedTodoItems()
+        {
+            // Arrange
+            items.Clear();
+            // Arrange
+            string description1 = "My todo 1";
+            bool done1 = false;
+            string description2 = "My todo 2";
+            bool done2 = false;
+            string description3 = "My todo 3";
+            bool done3 = true;
+            string description4 = "My todo 4";
+            bool done4 = true;
+            Person person1 = CreatePerson();
+
+            //Act
+            items.Clear();
+            items.AddTodo(description1, done1, person1);
+            items.AddTodo(description2, done2, person1);
+            items.AddTodo(description3, done3, person1);
+            items.AddTodo(description4, done4, null);
+            Todo[] todos = items.FindUnAssignedTodoITems();
+
+            //Assert
+            Assert.True(todos.Length == 1);
+        }
+
+        /// <summary>
+        /// Checks that Todos with doneStatus true is returned
+        /// </summary>
+        [Fact]
+        public void FindByDoneStatus_ShouldReturnTodoItemsWithDoneStatusTrue()
+        {
+            // Arrange
+            items.Clear();
+            // Arrange
+            string description1 = "My todo 1";
+            bool done1 = false;
+            string description2 = "My todo 2";
+            bool done2 = false;
+            string description3 = "My todo 3";
+            bool done3 = true;
+            Person person = CreatePerson();
+
+            //Act
+            items.Clear();
+            items.AddTodo(description1, done1, person);
+            items.AddTodo(description2, done2, person);
+            items.AddTodo(description3, done3, person);
+            Todo[] todos = items.FindByDoneStatus(false);
+
+            //Assert
+            Assert.Equal(2, todos.Length);
         }
     }
 }
