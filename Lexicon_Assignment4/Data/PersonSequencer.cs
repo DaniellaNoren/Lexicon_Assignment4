@@ -14,7 +14,8 @@ namespace Lexicon_Assignment4.Data
         /// <returns>Person id</returns>
         public static int NextPersonId()
         {
-            return ++personId;
+            personId = personId + 1;
+            return personId;
         }
 
         /// <summary>
