@@ -37,6 +37,10 @@ namespace Lexicon_Assignment4.Model
             this.LastName = lastName;
         }
 
+        /// <summary>
+        /// Checks that string is not empty or null. If it is, throws an exception
+        /// </summary>
+        /// <param name="str">String to be tested</param>
         public void CheckNullOrEmptyString(string str)
         {
             if (string.IsNullOrEmpty(str.Trim()))

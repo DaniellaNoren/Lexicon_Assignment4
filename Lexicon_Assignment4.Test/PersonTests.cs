@@ -8,7 +8,11 @@ namespace Lexicon_Assignment4.Test
 {
     public class PersonTests
     {
-
+        /// <summary>
+        /// Checks that exception is thrown when trying to send in empty or null string to Person-class.
+        /// </summary>
+        /// <param name="firstName">First name of Person</param>
+        /// <param name="lastName">Last name of person</param>
         [Theory]
         [InlineData("firstname", "")]
         [InlineData("firstname", " ")]
@@ -21,6 +25,12 @@ namespace Lexicon_Assignment4.Test
             Assert.Throws<NullReferenceException>(() => new Person(1, firstName, lastName));
         }
 
+        /// <summary>
+        /// Checks that Person-object is correctly created
+        /// </summary>
+        /// <param name="id">Id of person</param>
+        /// <param name="firstName">First name of person</param>
+        /// <param name="lastName">Last name of person</param>
         [Theory]
         [InlineData(1, "Anna", "Johansson")]
         [InlineData(3, "Peter", "Grönwall")]
