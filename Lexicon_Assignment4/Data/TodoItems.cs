@@ -74,6 +74,9 @@ namespace Lexicon_Assignment4.Data
             return todo;
         }
 
+        /// <summary>
+        /// Clears the Todo Array
+        /// </summary>
         public void Clear()
         {
             items = new Todo[0];
