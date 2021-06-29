@@ -76,6 +76,9 @@ namespace Lexicon_Assignment4.Test
             Assert.Null(people.FindById(250));
         }
 
+        /// <summary>
+        /// Checks that correct Array is returned
+        /// </summary>
         [Fact]
         public void FindAll()
         {
@@ -88,6 +91,56 @@ namespace Lexicon_Assignment4.Test
             Assert.True(2 == people.FindAll().Length);
         }
 
-        
+        /// <summary>
+        /// Checks that array shrinks in size after removal
+        /// </summary>
+        [Fact]
+        public void RemovePerson_ShouldShrinkArray()
+        {
+            InsertPeople();
+            Person person = people.CreatePerson("Terry", "Timber");
+
+            int originalSize = people.Size();
+            people.RemovePerson(person.PersonId);
+            int newSize = people.Size();
+
+            Assert.True(originalSize > newSize);
+           
+        }
+
+      
+        /// <summary>
+        /// Checks that Array does not change if Person cannot be found
+        /// </summary>
+        [Fact]
+        public void RemovePerson_ShouldNotRemoveIfPersonNotFound()
+        {
+            int originalSize = people.Size();
+            people.RemovePerson(250);
+            int newSize = people.Size();
+            Assert.True(originalSize == newSize);
+        }
+
+        /// <summary>
+        /// Checks that correct person is removed
+        /// </summary>
+        [Fact]
+        public void RemovePerson_ShouldRemoveCorrectPerson()
+        {
+            Person person = people.CreatePerson("Birgit", "Nilsson");
+            InsertPeople();
+         
+            people.RemovePerson(person.PersonId);
+       
+            Assert.Null(people.FindById(person.PersonId));
+        }
+
+        public void InsertPeople()
+        {
+            people.CreatePerson("Alice", "Corn");
+            people.CreatePerson("Kenny", "Roger");
+        }
+
+
     }
 }
