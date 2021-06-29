@@ -10,11 +10,11 @@ namespace Lexicon_Assignment4.Test
         public void IdCounterWorks()
         {
             // Arrange
-            TodoSequencer.reset();
+            TodoSequencer.Reset();
 
             //Act
-            int before = TodoSequencer.nextTodoId();
-            int result = TodoSequencer.nextTodoId();
+            int before = TodoSequencer.NextTodoId();
+            int result = TodoSequencer.NextTodoId();
 
             //Assert
             Assert.True(before < result);
@@ -24,12 +24,12 @@ namespace Lexicon_Assignment4.Test
         public void ResetWorks()
         {
             // Arrange
-            TodoSequencer.reset();
+            TodoSequencer.Reset();
 
             //Act
-            int before = TodoSequencer.nextTodoId();
-            TodoSequencer.reset();
-            int result = TodoSequencer.nextTodoId();
+            int before = TodoSequencer.NextTodoId();
+            TodoSequencer.Reset();
+            int result = TodoSequencer.NextTodoId();
 
             //Assert
             Assert.True(before == result);

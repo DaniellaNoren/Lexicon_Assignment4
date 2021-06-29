@@ -13,13 +13,13 @@ namespace Lexicon_Assignment4.Data
             todoId = 0;
         }
 
-        public static int nextTodoId()
+        public static int NextTodoId()
         {
             todoId++;
             return todoId;
         }
 
-        public static void reset()
+        public static void Reset()
         {
             todoId = 0;
         }
